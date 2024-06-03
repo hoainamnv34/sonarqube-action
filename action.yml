@@ -1,0 +1,23 @@
+name: 'SonarQube Scan Action'
+description: 'A reusable GitHub Action to run SonarQube scan using Docker'
+inputs:
+  sonar_host_url:
+    description: 'The SonarQube server URL'
+    required: true
+  sonar_scanner_opts:
+    description: 'Options for the SonarQube scanner'
+    required: true
+  sonar_token:
+    description: 'The SonarQube authentication token'
+    required: true
+  source_directory:
+    description: 'The source directory to mount into the Docker container'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.sonar_host_url }}
+    - ${{ inputs.sonar_scanner_opts }}
+    - ${{ inputs.sonar_token }}
+    - ${{ inputs.source_directory }}
